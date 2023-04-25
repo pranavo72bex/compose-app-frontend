@@ -5,7 +5,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import com.example.socialmedia.android.ui.screens.uii.DarkColors
 import com.example.socialmedia.android.ui.screens.uii.LightColors
-import com.example.socialmedia.android.ui.screens.uii.Shapes
+import com.example.socialmedia.android.theme.Shapes
 import com.example.socialmedia.android.ui.screens.uii.Typography
 
 @Composable

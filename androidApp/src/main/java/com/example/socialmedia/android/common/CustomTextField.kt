@@ -3,15 +3,18 @@ package com.example.socialmedia.android.common
 import androidx.annotation.StringRes
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
-import androidx.compose.runtime.Composable
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
 import com.example.socialmedia.android.R
 import com.example.socialmedia.android.ui.screens.uii.Gray
 
@@ -21,10 +24,13 @@ fun CustomTextField(
     value: String,
     onValueChange: (String) -> Unit,
     keyboardType: KeyboardType = KeyboardType.Text,
-    isPasswordTextField: Boolean = true,
+    isPasswordTextField: Boolean = false,
     @StringRes hint: Int,
-    isSingleLine: Boolean
+    isSingleLine: Boolean = true,
 ){
+    var isPasswordVisible by remember {
+        mutableStateOf(false)
+    }
 
     TextField(
         value = value,
@@ -44,6 +50,28 @@ fun CustomTextField(
             unfocusedIndicatorColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent
         ),
+        visualTransformation = if(isPasswordTextField){
+            if(isPasswordVisible){
+                VisualTransformation.None
+            } else{
+                PasswordVisualTransformation()
+            }
+        }else{
+            VisualTransformation.None
+        },
+        trailingIcon = if(isPasswordTextField) {
+            {
+                PasswordEyeIcon(isPasswordVisible = isPasswordVisible){
+                    isPasswordVisible =! isPasswordVisible
+                }
+            }
+        }else {
+            null
+        },
+      placeholder = {
+          Text(text = stringResource(id = hint), style = MaterialTheme.typography.body2)
+      },
+        shape = MaterialTheme.shapes.medium
 
     )
 
@@ -57,6 +85,14 @@ fun PasswordEyeIcon(
     val image = if(isPasswordVisible){
         painterResource(id = R.drawable.visible)
     } else {
-        painterResource(id = R.drawable.non_visibility)
+        painterResource(id = R.drawable.hidden_visible)
+    }
+    IconButton(onClick = onPasswordVisibilityToggle) {
+        Icon(
+            modifier = Modifier.size(20.dp),
+            painter = image,
+            contentDescription =null
+        )
     }
 }
+
