@@ -6,13 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.socialmedia.Greeting
 import com.example.socialmedia.android.auth.Login.LoginScreen
 import com.example.socialmedia.android.auth.Login.LoginUiState
-import com.example.socialmedia.android.auth.signup.SignupScreens
-import com.example.socialmedia.android.auth.signup.SignupUiState
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,11 +24,7 @@ class MainActivity : ComponentActivity() {
                         MaterialTheme.colors.surface
                     }
                 ) {
-                    LoginScreen(
-                        uiState = LoginUiState(),
-                        onEmailChange = {},
-                        onPasswordChange = {},
-                    )
+                    SocialApp()
                 }
             }
         }

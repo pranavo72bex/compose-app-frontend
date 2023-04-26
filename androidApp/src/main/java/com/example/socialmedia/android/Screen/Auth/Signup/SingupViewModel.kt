@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
-class SingupViewModel: ViewModel() {
+class SignUpViewModel: ViewModel() {
     var uiState by mutableStateOf(SignupUiState())
 
     private  set

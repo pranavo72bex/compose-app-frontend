@@ -31,6 +31,7 @@ fun  SignupScreens(
     onUsernameChange:(String)->Unit,
     onEmailChange:(String)-> Unit,
     onPasswordChange:(String) -> Unit,
+    onNavigateToLogin:() -> Unit
 ){
   Column(
       modifier = modifier
@@ -78,7 +79,9 @@ fun  SignupScreens(
               defaultElevation = 0.dp
           ),
           shape = MaterialTheme.shapes.medium,
-          onClick = { /*TODO*/ }
+          onClick = {
+              onNavigateToLogin()
+          }
       ) {
           Text(text = stringResource(id = R.string.signup_button_hint))
       }
