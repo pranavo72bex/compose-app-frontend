@@ -1,5 +1,5 @@
-package com.example.Auth.domain.repository
-import com.example.Auth.domain.model.AuthResultData
+package domain.repository
+import domain.model.AuthResultData
 import com.example.common.util.Result
 
 internal interface AuthRepository {

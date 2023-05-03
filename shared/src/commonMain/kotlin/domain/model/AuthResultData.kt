@@ -1,4 +1,4 @@
-package com.example.Auth.domain.model
+package domain.model
 
 data class AuthResultData(
     val id: Int,
