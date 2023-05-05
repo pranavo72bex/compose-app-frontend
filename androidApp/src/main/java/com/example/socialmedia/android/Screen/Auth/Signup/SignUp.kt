@@ -21,6 +21,11 @@ fun  SignUp(
         onPasswordChange =viewModel::updateUserPassword,
         onNavigateToLogin = {
             navigator.navigate(LoginDestination)
-        }
+        },
+        onNavigateToHome = {
+
+        },
+        onSignUpClick = viewModel::signUp
+
     )
 }
