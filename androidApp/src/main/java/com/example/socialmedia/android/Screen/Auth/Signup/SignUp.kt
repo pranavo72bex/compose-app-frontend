@@ -1,7 +1,9 @@
 package com.example.socialmedia.android.Screen.Auth.Signup
 
 import androidx.compose.runtime.Composable
-import com.example.socialmedia.android.Screen.Auth.destinations.LoginDestination
+import com.example.socialmedia.android.Screen.Home.HomeScreen
+import com.example.socialmedia.android.Screen.destinations.HomeScreenDestination
+import com.example.socialmedia.android.Screen.destinations.LoginDestination
 import com.example.socialmedia.android.auth.signup.SignUpViewModel
 import com.example.socialmedia.android.auth.signup.SignupScreens
 import com.ramcosta.composedestinations.annotation.Destination
@@ -23,7 +25,7 @@ fun  SignUp(
             navigator.navigate(LoginDestination)
         },
         onNavigateToHome = {
-
+             navigator.navigate(HomeScreenDestination)
         },
         onSignUpClick = viewModel::signUp
 
