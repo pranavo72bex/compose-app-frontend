@@ -7,11 +7,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.ramcosta.composedestinations.annotation.Destination
 
-@Composable
 @Destination
-fun  HomeScreen(
-    modifier: Modifier= Modifier
-){
+@Composable
+
+fun  HomeScreen() {
     Box(modifier = Modifier.fillMaxSize()){
         Text(text = "HomeScreen")
     }

@@ -1,12 +1,13 @@
 package com.example.di
 import com.example.Auth.data.AuthService
 import com.example.common.util.provideDispatcher
-import domain.repository.AuthRepositoryImpl
-import domain.useCase.SignInUseCase
-import domain.useCase.SignupUseCase
+import com.example.domain.repository.AuthRepository
+import com.example.domain.repository.AuthRepositoryImpl
+import com.example.domain.useCase.SignInUseCase
+import com.example.domain.useCase.SignupUseCase
 import org.koin.dsl.module
 private val authModule = module{
-    single { AuthRepositoryImpl(get(),get()) }
+    single<AuthRepository> { AuthRepositoryImpl(get(),get()) }
     factory { AuthService() }
     factory { SignupUseCase() }
     factory { SignInUseCase() }

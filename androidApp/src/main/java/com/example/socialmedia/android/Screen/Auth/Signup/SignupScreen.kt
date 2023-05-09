@@ -1,4 +1,4 @@
-package com.example.socialmedia.android.auth.signup
+package com.example.socialmedia.android.Screen.Auth.Signup
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -14,10 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.socialmedia.android.R
-import com.example.socialmedia.android.SocialAppTheme
+import com.example.socialmedia.android.auth.signup.SignupUiState
 import com.example.socialmedia.android.common.CustomTextField
 import com.example.socialmedia.android.ui.screens.uii.ButtonHeight
 import com.example.socialmedia.android.ui.screens.uii.ExtraLargeSpacing
@@ -98,8 +97,8 @@ fun  SignupScreens(
     LaunchedEffect(
         key1 = uiState.authenticationSucceed,
         key2 = uiState.authError,
-        block ={
-            if(uiState.isAuthenticating){
+        block = {
+            if(uiState.authenticationSucceed){
                 onNavigateToHome()
             }
             if (uiState.authError != null){

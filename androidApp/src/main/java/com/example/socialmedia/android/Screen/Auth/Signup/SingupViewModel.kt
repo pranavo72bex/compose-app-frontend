@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import domain.useCase.SignupUseCase
+import com.example.domain.useCase.SignupUseCase
 import kotlinx.coroutines.launch
 import com.example.common.util.Result
 

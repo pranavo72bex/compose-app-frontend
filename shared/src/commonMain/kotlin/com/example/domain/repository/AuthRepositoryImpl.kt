@@ -1,10 +1,10 @@
-package domain.repository
+package com.example.domain.repository
 
 import com.example.Auth.data.AuthService
 import com.example.Auth.data.SignInRequest
 import com.example.Auth.data.SignUpRequest
 import com.example.Auth.data.toAuthResultData
-import domain.model.AuthResultData
+import com.example.domain.model.AuthResultData
 import com.example.common.util.DispatcherProvider
 import com.example.common.util.Result
 import kotlinx.coroutines.withContext

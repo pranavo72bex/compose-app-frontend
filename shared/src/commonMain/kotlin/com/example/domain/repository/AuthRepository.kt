@@ -1,9 +1,8 @@
-package domain.repository
-import domain.model.AuthResultData
+package com.example.domain.repository
+import com.example.domain.model.AuthResultData
 import com.example.common.util.Result
 
 internal interface AuthRepository {
-
     suspend fun signUp(
         name: String,
         email: String,
