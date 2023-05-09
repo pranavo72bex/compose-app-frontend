@@ -1,17 +1,17 @@
 package com.example.socialmedia.android.auth.Login
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -29,52 +29,83 @@ fun  LoginScreen(
     uiState: LoginUiState,
     onEmailChange:(String)-> Unit,
     onPasswordChange:(String) -> Unit,
-){
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(
-                top = ExtraLargeSpacing + LargeSpacing,
-                start = LargeSpacing + MediumSpacing,
-                end = LargeSpacing + MediumSpacing,
-                bottom = LargeSpacing
-            )
-            .background(
-                color = if (isSystemInDarkTheme()) {
-                    MaterialTheme.colors.background
-                } else {
-                    MaterialTheme.colors.surface
-                }
-            ),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(LargeSpacing)
+    onNavigateToHome: () -> Unit,
+    onSignInClick: () -> Unit
+
+){  val context = LocalContext.current
+    Box(modifier =
+    Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center,
+
     ) {
-        CustomTextField(
-            value = uiState.email,
-            onValueChange = onEmailChange,
-            hint = R.string.email_hint,
-            keyboardType = KeyboardType.Email
-        )
-        CustomTextField(
-            value = uiState.password,
-            onValueChange = onPasswordChange,
-            hint = R.string.password_hint,
-            keyboardType = KeyboardType.Password,
-            isPasswordTextField = true
-        )
-        Button(
+
+        Column(
             modifier = modifier
-                .fillMaxWidth()
-                .height(ButtonHeight),
-            elevation = ButtonDefaults.elevation(
-                defaultElevation = 0.dp
-            ),
-            shape = MaterialTheme.shapes.medium,
-            onClick = { /*TODO*/ }
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(
+                    top = ExtraLargeSpacing + LargeSpacing,
+                    start = LargeSpacing + MediumSpacing,
+                    end = LargeSpacing + MediumSpacing,
+                    bottom = LargeSpacing
+                )
+                .background(
+                    color = if (isSystemInDarkTheme()) {
+                        MaterialTheme.colors.background
+                    } else {
+                        MaterialTheme.colors.surface
+                    }
+                ),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(LargeSpacing)
         ) {
-            Text(text = stringResource(id = R.string.login_button_hint))
+            CustomTextField(
+                value = uiState.email,
+                onValueChange = onEmailChange,
+                hint = R.string.email_hint,
+                keyboardType = KeyboardType.Email
+            )
+            CustomTextField(
+                value = uiState.password,
+                onValueChange = onPasswordChange,
+                hint = R.string.password_hint,
+                keyboardType = KeyboardType.Password,
+                isPasswordTextField = true
+            )
+            Button(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .height(ButtonHeight),
+                elevation = ButtonDefaults.elevation(
+                    defaultElevation = 0.dp
+                ),
+                shape = MaterialTheme.shapes.medium,
+                onClick = {
+                    onSignInClick()
+                }
+            ) {
+                Text(text = stringResource(id = R.string.login_button_hint))
+            }
         }
+
+        if(uiState.isAuthenticating){
+            CircularProgressIndicator()
+        }
+
     }
+    LaunchedEffect(
+        key1 = uiState.authenticationSucceed,
+        key2 = uiState.authError,
+        block = {
+            if(uiState.authenticationSucceed){
+                onNavigateToHome()
+            }
+            if (uiState.authError != null){
+                Toast.makeText(context,uiState.authError, Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+    )
 }
 
